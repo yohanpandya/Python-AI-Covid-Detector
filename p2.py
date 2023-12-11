@@ -17,14 +17,14 @@ trainY = torch.tensor(train_df.iloc[:, -1:].values, dtype=torch.float64)
 
 testX = torch.tensor(test_df.iloc[:, :-1].values, dtype=torch.float64)
 testY = torch.tensor(test_df.iloc[:, -1:].values, dtype=torch.float64)
-print (testY)
+#print (testY)
 #print (trainY)
 
 totalbytes = 0;
 for i in trainX:
     for j in i:
         totalbytes= totalbytes + trainX.element_size() 
-totalbytes
+print("total bytes in trainX:", totalbytes)
     
 
 
@@ -40,7 +40,7 @@ difference = torch.abs(trainX - trainX_float16)
 
 max_difference = difference.max().item()
 
-max_difference
+print("biggest different in any one cell if we used float16 instead of float64",max_difference)
 
 
 # In[3]:
@@ -49,7 +49,10 @@ max_difference
 #q3: Write a code snippet to produce a True/False answer.
 cuda_available = torch.cuda.is_available()
 
-cuda_available
+if(cuda_available):
+    print("cuda GPU is available")
+else:
+    print("cuda GPU is not available")
 
 
 # In[4]:
@@ -74,7 +77,7 @@ first_row = testX[0]
 #testX[0]
 #firstRowResult  = torch.matmul(first_row, coef).item()
 firstRowResult = (first_row@coef).item()
-firstRowResult
+print("after training model, the number of predicted deaths for the first census tract is",firstRowResult)
 
 
 # In[5]:
@@ -83,7 +86,7 @@ firstRowResult
 #q5: what is the average number of predicted deaths, over the whole testX dataset?
 TrainXResult = torch.matmul(testX,coef)
 mean = torch.mean(TrainXResult)
-mean.item()
+print("the average number of predicted deaths over the whole testX dataset is",mean.item())
 
 
 # In[6]:
@@ -124,7 +127,7 @@ for epoch in range(100):
     optimizer.step()
     optimizer.zero_grad()
 x.item()
-
+print("after using optimizer, the x value that minimizes y is", x.item())
 
 # In[ ]:
 
@@ -152,7 +155,7 @@ loss = loss_fn(predictions, trainY)
 loss.backward() #computes coef.grad
 optimizer.step()
 loss.item()
-
+print("MSE when we make prediction of vector of zero coefs", loss.item())
 
 
 
@@ -192,7 +195,7 @@ for epoch in range(500):
         optimizer.zero_grad()
 
 
-loss_fn(trainX @ coef,trainY).item()
+print("actual loss",loss_fn(trainX @ coef,trainY).item())
 
 
 # In[12]:
