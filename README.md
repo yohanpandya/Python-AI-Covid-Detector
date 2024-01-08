@@ -1,5 +1,7 @@
 In this project, I use PyTorch to create a regression model that can predict how many deaths there will be for a Wisconsin census tract, given the number of people who have tested positive, broken down by age. The train.csv and test.csv files are based on data from https://dhsgis.wi.gov/, downloaded in Spring of 2023 (it appears the dataset is no longer available). p2.py is a JupyterLab file that was converted from .ipynb to .py. It is broken up into 10 cells, each one outputting an important step in the process of training and testing a ML model.
 
+This project requires you to have matplotlib and torch installed (which can both be installed with pip install ___). In this project, I leverage pandas dataframes and pyTorch tensors to output useful information about my predictions.
+
 Cell 1 - Memory Consumption Calculation:
 
 This cell imports necessary libraries, reads data from CSV files into Pandas DataFrames (train_df and test_df), and converts them into PyTorch tensors (trainX, trainY, testX, and testY).
